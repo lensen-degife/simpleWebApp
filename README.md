@@ -1,34 +1,31 @@
----
-
 # 🚀 Product Service API
 
-A production-style **Spring Boot REST API** for managing products with database integration, layered architecture, and optional Spring Security support.
+A robust **Spring Boot REST API** for managing products using clean architecture, JPA persistence, and multi-database support.
 
 ---
 
 ## ✨ Features
 
-* 🧩 Full **CRUD operations** for Products (Create, Read, Update, Delete)
+* ✅ Full **CRUD** operations for products
 * 🌐 RESTful API built with Spring Boot
-* 🗄️ JPA + Hibernate for database persistence
-* 🧪 **H2 Database** for development & testing
+* 🗄️ JPA + Hibernate persistence layer
+* 🧪 **H2** database support for development
 * 🏢 **Microsoft SQL Server** support for production
-* 🔐 Spring Security integration
-* 🧼 Clean layered architecture (Controller → Service → Repository)
-* 📦 Maven-based build system
-* ✨ Lombok for cleaner, boilerplate-free code
+* 🔐 Spring Security ready
+* 🧼 Clean layered architecture (`Controller → Service → Repository`)
+* 📦 Maven build system with Lombok support
 
 ---
 
 ## 🛠️ Tech Stack
 
-* Java **25**
-* Spring Boot **3.4+**
-* Spring Web (Spring MVC)
+* **Java** 21 / 25
+* **Spring Boot** 3.4+
+* Spring Web
 * Spring Data JPA
 * Spring Security
-* Microsoft SQL Server
 * H2 Database
+* Microsoft SQL Server
 * Lombok
 * Maven
 
@@ -36,61 +33,49 @@ A production-style **Spring Boot REST API** for managing products with database 
 
 ## 📁 Project Structure
 
-```
-product-service-api/
-├── src/
-│   ├── main/
-│   │   ├── java/com/example/productservice/
-│   │   │   ├── controller/     # REST controllers
-│   │   │   ├── service/        # Business logic layer
-│   │   │   ├── repository/     # Data access layer (JPA)
-│   │   │   ├── model/          # Entity classes
-│   │   │   ├── dto/            # Data Transfer Objects (optional)
-│   │   │   ├── config/         # Security & configuration
-│   │   │   └── ProductServiceApiApplication.java
-│   │   │
-│   │   └── resources/
-│   │       ├── application.properties
-│   │       ├── application-dev.properties
-│   │       ├── application-prod.properties
-│   │       └── data.sql
-│   │
-│   └── test/
-│       └── java/com/example/productservice/
-│           └── ProductServiceApiApplicationTests.java
-│
-├── pom.xml
-├── README.md
-└── mvnw / mvnw.cmd
+```bash
+src/main/java/com/telusko/simpleWebApp/
+├── config/           # Security & application configuration
+├── controller/       # REST controllers
+├── model/            # JPA entities
+├── repository/       # JPA repositories
+├── service/          # Business logic layer
+└── SimpleWebAppApplication.java
+
+src/main/resources/
+├── application.properties
+└── data.sql          # Optional sample data
 ```
 
 ---
 
 ## ⚙️ Getting Started
 
-### 1️⃣ Clone the repository
+### 1️⃣ Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/product-service-api.git
+git clone https://github.com/lensen-degife/product-service-api.git
 cd product-service-api
 ```
 
 ---
 
-### 2️⃣ Configure Database
+### 2️⃣ Configure the Database
 
-#### 🧪 H2 Database (Default – Development)
+## Development (H2 - Default)
 
-No configuration required. Runs in-memory automatically.
+No additional setup is required.
+The application uses an in-memory H2 database by default.
 
 ---
 
-#### 🏢 Microsoft SQL Server (Production)
+## Production (Microsoft SQL Server)
 
-Update `application-prod.properties`:
+Update `src/main/resources/application.properties`
+or create a dedicated `application-prod.properties` file.
 
 ```properties
-spring.datasource.url=jdbc:sqlserver://localhost:1433;databaseName=your_db
+spring.datasource.url=jdbc:sqlserver://localhost:1433;databaseName=product_db;encrypt=true;trustServerCertificate=true
 spring.datasource.username=your_username
 spring.datasource.password=your_password
 
@@ -100,117 +85,113 @@ spring.jpa.database-platform=org.hibernate.dialect.SQLServerDialect
 
 ---
 
-## ▶️ Run the Application
+## ▶️ Running the Application
 
-### Build project
-
-```bash
-mvn clean install
-```
-
-### Start server
+### Build the Project
 
 ```bash
-mvn spring-boot:run
+./mvnw clean install
 ```
 
-Application runs at:
+### Run the Application
 
+```bash
+./mvnw spring-boot:run
 ```
-http://localhost:8080
+
+The application will start at:
+
+```text
+http://localhost:8090
 ```
 
 ---
 
 ## 📡 API Endpoints
 
-### Product APIs
-
-| Method | Endpoint             | Description        |
-| ------ | -------------------- | ------------------ |
-| GET    | `/api/products`      | Get all products   |
-| GET    | `/api/products/{id}` | Get product by ID  |
-| POST   | `/api/products`      | Create new product |
-| PUT    | `/api/products/{id}` | Update product     |
-| DELETE | `/api/products/{id}` | Delete product     |
+| Method | Endpoint             | Description                |
+| ------ | -------------------- | -------------------------- |
+| GET    | `/api/products`      | Get all products           |
+| GET    | `/api/products/{id}` | Get a product by ID        |
+| POST   | `/api/products`      | Create a new product       |
+| PUT    | `/api/products/{id}` | Update an existing product |
+| DELETE | `/api/products/{id}` | Delete a product           |
 
 ---
 
-## 📦 Sample Request
-
-### Create Product
+## 📥 Sample Request — Create Product
 
 ```json
 {
   "name": "Laptop",
   "description": "High-performance gaming laptop",
-  "price": 1200.00
+  "price": 1299.99
 }
 ```
-
----
-
-## 🔐 Security
-
-Spring Security is enabled (if configured).
-
-You can extend it with:
-
-* Basic Authentication
-* JWT Authentication
-* Role-based authorization
 
 ---
 
 ## 🧪 Running Tests
 
 ```bash
-mvn test
+./mvnw test
 ```
 
 ---
 
-## 📈 Future Improvements
+## 🔐 Security
 
-* 🔐 JWT Authentication
-* 📄 Swagger / OpenAPI documentation
-* 🔎 Pagination & filtering
-* 🐳 Docker support
-* ☁️ Cloud deployment (AWS / Azure)
-* 🧪 Integration tests (Testcontainers)
+Spring Security is already configured and can be extended with:
+
+* JWT Authentication
+* OAuth2
+* Role-based Authorization
+* API Key Authentication
+
+---
+
+## 📈 Future Enhancements
+
+* ✅ JWT Authentication
+* ✅ Swagger / OpenAPI Documentation
+* ✅ Pagination & Filtering
+* ✅ Docker Support
+* ✅ Testcontainers Integration Testing
+* ✅ CI/CD Pipeline
 
 ---
 
 ## 🤝 Contributing
 
 1. Fork the repository
-2. Create feature branch
+2. Create a new feature branch
 
-   ```bash
-   git checkout -b feature/new-feature
-   ```
-3. Commit changes
+```bash
+git checkout -b feature/amazing-feature
+```
 
-   ```bash
-   git commit -m "Add new feature"
-   ```
-4. Push branch
+3. Commit your changes
 
-   ```bash
-   git push origin feature/new-feature
-   ```
-5. Open Pull Request
+```bash
+git commit -m "Add amazing feature"
+```
+
+4. Push to the branch
+
+```bash
+git push origin feature/amazing-feature
+```
+
+5. Open a Pull Request
 
 ---
 
 ## 📄 License
 
-This project is licensed under the MIT License.
+This project is licensed under the **MIT License**.
 
 ---
 
-## ⭐ Support
+## ❤️ Author
 
-If you like this project, consider giving it a ⭐ on GitHub.
-
----
+Made with ❤️ by **lensen-degife**
