@@ -22,8 +22,8 @@ public class MyUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("User not found!");
         }
         return org.springframework.security.core.userdetails.User
-                .withUsername(user.getUsername)
-                .password(user.getPassword)
+                .withUsername(user.getUsername())
+                .password(user.getPassword())
                 .build();
 
     }
